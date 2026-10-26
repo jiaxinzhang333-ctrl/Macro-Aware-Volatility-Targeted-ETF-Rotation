@@ -37,6 +37,21 @@ Volatility targeting materially reduces realized volatility and maximum drawdown
 
 These figures are simulated results, not live investment returns.
 
+
+## Strategy Visualizations
+
+### Strategy Equity Curve
+
+![Strategy Equity Curve](results/figures/risk_equity_comparison.png)
+
+### Drawdown Comparison
+
+![Drawdown Comparison](results/figures/risk_drawdown_comparison.png)
+
+### Portfolio Allocation
+
+![Portfolio Allocation](results/figures/risk_weight_comparison.png)
+
 ## 3. Methodology
 
 The framework incorporates:

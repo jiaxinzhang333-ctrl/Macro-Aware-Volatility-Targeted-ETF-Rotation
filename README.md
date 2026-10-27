@@ -127,3 +127,46 @@ The strategy does not include a verified live-trading track record.
 ## 8. Technology
 
 Python, pandas, NumPy, SciPy, Matplotlib, Jupyter Notebook, yfinance, and Git.
+
+## 9. Forward Performance Tracking
+
+The final **V2 + CPI Overlay** strategy is continuously evaluated beyond the historical backtest period using updated US ETF market data.
+
+**Evaluation Periods**
+- Historical out-of-sample: January 2020 – September 2026
+- Forward extension: October 1, 2026 – latest available completed US trading day
+
+### Update and Run
+
+Run the following command from the project root:
+
+`python3 run_forward.py --update-data`
+
+This updates ETF prices, rebuilds strategy signals, simulates the portfolio, checks CPI data coverage, and generates the latest performance dashboard and allocation visualizations.
+
+### Forward Performance Outputs
+
+| File | Description |
+|---|---|
+| `results/Forward_Performance.html` | Forward performance dashboard |
+| `results/forward/forward_daily_equity.csv` | Daily simulated portfolio equity |
+| `results/forward/forward_trades.csv` | Simulated trades |
+| `results/forward/latest_target_weights.csv` | Latest target allocation |
+
+### Final Strategy Visualizations
+
+**Monthly V2 + CPI Portfolio Allocation**
+
+![Monthly Allocation](results/figures/final_strategy_weights_monthly.png)
+
+**Latest V2 + CPI Target Weights**
+
+![Latest Target Weights](results/figures/latest_target_weights.png)
+
+### Important Notes
+
+This is a continuously updated historical simulation using actual ETF market prices, not live brokerage trading.
+
+ETF prices are refreshed automatically. CPI actual values and consensus forecasts are maintained separately, with release coverage checked against a configured schedule.
+
+Historical strategy decisions are recalculated from the available dataset rather than preserved in an immutable paper-trading ledger.

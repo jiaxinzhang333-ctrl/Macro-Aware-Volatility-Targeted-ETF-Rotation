@@ -20,6 +20,13 @@ def main():
     )
     args = parser.parse_args()
 
+    # Use a non-interactive plotting backend for automatic runs.
+    import os
+    os.environ["MPLBACKEND"] = "Agg"
+
+    from cpi_check import check_cpi
+    check_cpi()
+
     if args.update_data:
         print("Updating US ETF data...")
         updater = pa.load_definitions("01_data_update")
@@ -102,9 +109,31 @@ def main():
         header=True,
     )
 
+    # Refresh portfolio allocation visualizations.
+    import subprocess
+    import sys
+    subprocess.run(
+        [sys.executable, str(ROOT / "plot_weights.py")],
+        check=True,
+        cwd=ROOT,
+    )
+
     # Generate the HTML dashboard automatically.
     from forward_report import main as generate_report
     generate_report()
+
+    # open_new_charts_after_run
+    import subprocess
+    import sys
+    if sys.platform == "darwin":
+        subprocess.run(
+            ["open", str(ROOT / "results/figures/final_strategy_weights_monthly.png")],
+            check=True,
+        )
+        subprocess.run(
+            ["open", str(ROOT / "results/figures/latest_target_weights.png")],
+            check=True,
+        )
 
     latest = table.iloc[-1]
 
